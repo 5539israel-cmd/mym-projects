@@ -203,13 +203,14 @@ body{font-family:Arial,sans-serif;background:#f0f2f5;min-height:100vh}
 <div class="save-toast" id="toast">Saved!</div>
 <input type="file" accept="image/*" capture="environment" id="photoInput" style="display:none" onchange="handlePhoto(event)">
 
-<!-- Firebase SDK -->
+<!-- Firebase SDK (compat - no modules needed) -->
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, set, get, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 
-const firebaseConfig = {
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script>
+firebase.initializeApp({
   apiKey: "AIzaSyASJbIYESwAAqW7kJnMwH3CxgLncVDjWck",
   authDomain: "mym-developers.firebaseapp.com",
   databaseURL: "https://mym-developers-default-rtdb.firebaseio.com",
@@ -217,10 +218,12 @@ const firebaseConfig = {
   storageBucket: "mym-developers.firebasestorage.app",
   messagingSenderId: "1078772882927",
   appId: "1:1078772882927:web:403bbebb56a0f51b6aaa1a"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+});
+const db = firebase.database();
+function ref(path){ return db.ref(path); }
+function get(r){ return r.once('value'); }
+function set(r,v){ return r.set(v); }
+function onValue(r,cb){ r.on('value', cb); }
 
 //  USERS 
 const USERS = [
@@ -317,7 +320,7 @@ function fillDefaults(){
 async function loadFromFirebase(){
   try{
     setSyncStatus("saving");
-    const snapshot=await get(ref(db,"mym_platform"));
+    const snapshot=await get(ref("mym_platform"));
     if(snapshot.exists()){DATA=snapshot.val();}
     setSyncStatus("live");
   }catch(e){setSyncStatus("error");}
@@ -329,7 +332,7 @@ function saveToFirebase(){
   clearTimeout(saveTimer);
   saveTimer=setTimeout(async()=>{
     try{
-      await set(ref(db,"mym_platform"),DATA);
+      await set(ref("mym_platform"),DATA);
       setSyncStatus("live");showToast();
     }catch(e){setSyncStatus("error");}
   },800);
@@ -337,7 +340,7 @@ function saveToFirebase(){
 
 // Real-time listener  any change by anyone updates all screens instantly
 function startListener(){
-  onValue(ref(db,"mym_platform"),(snapshot)=>{
+  onValue(ref("mym_platform"),(snapshot)=>{
     if(snapshot.exists()){
       const fresh=snapshot.val();
       // Only update if not currently saving (avoid overwrite)
