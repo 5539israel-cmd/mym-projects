@@ -323,12 +323,11 @@ async function loadFromFirebase(){
     const snapshot=await get(ref("mym_platform"));
     if(snapshot.exists()&&snapshot.val()&&Object.keys(snapshot.val()).length>0){
       DATA=snapshot.val();
-      setSyncStatus("live");
-      return;
+    } else {
+      fillDefaults();
     }
     setSyncStatus("live");
-  }catch(e){setSyncStatus("error");}
-  fillDefaults();
+  }catch(e){setSyncStatus("error");fillDefaults();}
 }
 
 function saveToFirebase(){
