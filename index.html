@@ -321,7 +321,11 @@ async function loadFromFirebase(){
   try{
     setSyncStatus("saving");
     const snapshot=await get(ref("mym_platform"));
-    if(snapshot.exists()){DATA=snapshot.val();}
+    if(snapshot.exists()&&snapshot.val()&&Object.keys(snapshot.val()).length>0){
+      DATA=snapshot.val();
+      setSyncStatus("live");
+      return;
+    }
     setSyncStatus("live");
   }catch(e){setSyncStatus("error");}
   fillDefaults();
