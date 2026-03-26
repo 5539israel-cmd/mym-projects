@@ -222,7 +222,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-// ══ USERS ════════════════════════════════════════════════════════════════════
+//  USERS 
 const USERS = [
   {u:"admin",      p:"MYM2025!",   role:"admin",  projects:null},
   {u:"office",     p:"MYMoffice",  role:"staff",  projects:null},
@@ -235,7 +235,7 @@ const USERS = [
   {u:"owner_lp",   p:"LP2025",     role:"owner",  projects:["2 Lone Pine Dr"]},
 ];
 
-// ══ TRADES ═══════════════════════════════════════════════════════════════════
+//  TRADES 
 const TRADES=[["T01","1.  Dig Foundation","#DEEAF1"],["T02","2.  Footings","#DEEAF1"],["T03","3.  Frost Walls","#DEEAF1"],["T04","4.  Waterproof Dropped Footings","#DEEAF1"],["T05","5.  Water / Sewer Trench","#DEEAF1"],["T06","6.  Deep Underground Plumbing","#DEEAF1"],["T07","7.  Backfill Foundation","#DEEAF1"],["T08","8.  Back Foundation Walls","#FCE4D6"],["T09","9.  Front Foundation Walls","#FCE4D6"],["T10","10. Underground Plumbing","#FCE4D6"],["T11","11. Backfill & Prep Slab","#FCE4D6"],["T12","12. Pour Slab","#FCE4D6"],["T13","13. Waterproof Foundation Walls","#FCE4D6"],["T14","14. Backfill Around Building","#FCE4D6"],["T15","15. Frame Basement","#E2EFDA"],["T16","16. Frame 1st Floor","#E2EFDA"],["T17","17. Steel Beams & Columns","#E2EFDA"],["T18","18. Frame 2nd Floor","#E2EFDA"],["T19","19. Frame 3rd Floor","#E2EFDA"],["T20","20. Frame 4th Floor","#E2EFDA"],["T21","21. Roof - Sheeting / Chimney / Shingles","#FFF2CC"],["T22","22. Windows / Stairs / Doors / Clean","#FFF2CC"],["T23","23. Standpipe","#E2D9F3"],["T24","24. Electrical - Boxes & High-Hats","#E2D9F3"],["T25","25. HVAC Rough-In","#E2D9F3"],["T26","26. Plumbing - Waste Lines","#E2D9F3"],["T27","27. Electrical - Rough-In","#E2D9F3"],["T28","28. Plumbing - Gas / Heat / Water","#E2D9F3"],["T29","29. Sprinkler Rough-In","#E2D9F3"],["T30","30. Low Voltage","#E2D9F3"],["T31","31. Elevators","#E2D9F3"],["T32","32. Siding","#D9EAD3"],["T33","33. Decks","#D9EAD3"],["T34","34. Steel for Decks","#D9EAD3"],["T35","35. Gutters","#D9EAD3"],["T36","36. Building Clean","#D9EAD3"],["T37","37. Walk-Through & Punch List #1","#D9EAD3"],["T38","38. Fire Stopping & Inspection","#D9EAD3"],["T39","39. Insulation","#F0E6D3"],["T40","40. 3D Documentation","#F0E6D3"],["T41","41. Insulation Inspection","#F0E6D3"],["T42","42. Sheetrock Delivery","#F0E6D3"],["T43","43. Sheetrock Installation","#F0E6D3"],["T44","44. Spackle","#F0E6D3"],["T45","45. Broom Cleaning","#F0E6D3"],["T46","46. Hardwood Flooring","#FCE4D6"],["T47","47. Tile Installation","#FCE4D6"],["T48","48. Boilers & Water Meters","#DEEAF1"],["T49","49. AC Grills / Thermostats / Switches","#DEEAF1"],["T50","50. Trimming","#E2EFDA"],["T51","51. Kitchen Delivery & Installation","#E2EFDA"],["T52","52. Granite / Countertops","#E2EFDA"],["T53","53. Wall Tiles","#E2EFDA"],["T54","54. Interior Railings & Handrails","#E2EFDA"],["T55","55. Walk-Through & Clean Before Paint","#FFF2CC"],["T56","56. Paint","#FFF2CC"],["T57","57. Hardware - Handles / Locks / Stoppers","#FFF2CC"],["T58","58. Sinks & Toilets","#FFF2CC"],["T59","59. Final Cleaning","#FFF2CC"],["T60","60. Unit Numbers & Directional Signage","#FFF2CC"]];
 const GROUPS={"T01":["FOUNDATION & UNDERGROUND","#2E5090"],"T08":["FOUNDATION WALLS & SLAB","#C55A11"],"T15":["FRAMING","#375623"],"T21":["ROOF, WINDOWS & CLOSE-IN","#C55A11"],"T23":["ROUGH-IN (Sec 1-2 to 3-4 to 5-6)","#3B1F6E"],"T32":["EXTERIOR, SIDING & INSPECTIONS","#1F4E4E"],"T39":["INSULATION, SHEETROCK & SPACKLE","#4E3B1F"],"T46":["FLOORING","#C55A11"],"T48":["MEP FINISHES","#2E5090"],"T50":["TRIM, KITCHENS & COUNTERTOPS","#375623"],"T55":["PAINT & FINAL FINISHES","#C55A11"]};
 const TIDX={};TRADES.forEach((t,i)=>TIDX[t[0]]=i);
@@ -251,7 +251,7 @@ const PROJECTS=[
   {id:"lp",  name:"2 Lone Pine Dr",   color:"#4E3B1F",light:"#F0E6D3",buildings:["Main Building"],defaults:{}},
 ];
 
-// ══ AUTH ══════════════════════════════════════════════════════════════════════
+//  AUTH 
 let CU=null;
 function setLoginRole(r){document.getElementById("tabAdmin").className="role-tab"+(r==="admin"?" active":"");document.getElementById("tabOwner").className="role-tab"+(r==="owner"?" active":"");}
 function doLogin(){const u=document.getElementById("loginUser").value.trim(),p=document.getElementById("loginPass").value,f=USERS.find(x=>x.u===u&&x.p===p);if(f){CU=f;sessionStorage.setItem("mym_u",JSON.stringify(f));showApp();}else{document.getElementById("loginErr").style.display="block";document.getElementById("loginPass").value="";}}
@@ -265,19 +265,19 @@ function showApp(){
   document.getElementById("loginScreen").style.display="none";
   document.getElementById("mainApp").style.display="block";
   const b=document.getElementById("roleBadge");
-  b.textContent={admin:"👑 Admin",staff:"🔧 Staff",owner:"👔 Owner"}[CU.role]||CU.role;
+  b.textContent={admin:"Admin",staff:"Staff",owner:"Owner"}[CU.role]||CU.role;
   b.className="role-badge "+CU.role;
   buildNav();bootApp();
 }
 function buildNav(){
   const nav=document.getElementById("navBar");
-  let h=`<button class="nav-btn active" id="btn-dashboard" onclick="setView('dashboard')">🏗 Projects</button>`;
-  h+=`<button class="nav-btn" id="btn-summary" onclick="setView('summary')">📊 Summary</button>`;
-  if(isAdmin())h+=`<button class="nav-btn" id="btn-admin" onclick="setView('admin')">⚙️ Admin</button>`;
+  let h=`<button class="nav-btn active" id="btn-dashboard" onclick="setView('dashboard')"> Projects</button>`;
+  h+=`<button class="nav-btn" id="btn-summary" onclick="setView('summary')"> Summary</button>`;
+  if(isAdmin())h+=`<button class="nav-btn" id="btn-admin" onclick="setView('admin')"> Admin</button>`;
   nav.innerHTML=h;
 }
 
-// ══ FIREBASE DATA ═════════════════════════════════════════════════════════════
+//  FIREBASE DATA 
 let DATA={},view="dashboard",activeProject=null,activeBuilding=null,saveTimer=null,bldgViewMode="cards";
 let lbProj=null,lbBldg=null,lbIdx=null,pendingPhotoProj=null,pendingPhotoBldg=null;
 
@@ -285,7 +285,7 @@ function setSyncStatus(s){
   const d=document.getElementById("syncDot"),l=document.getElementById("syncLabel");
   if(!d)return;
   d.className="sync-dot"+(s==="saving"?" saving":s==="error"?" error":"");
-  l.textContent=s==="saving"?"Saving...":s==="error"?"Connection error — retrying":"Live ✓";
+  l.textContent=s==="saving"?"Saving...":s==="error"?"Connection error  retrying":"Live ";
 }
 
 function dbKey(projId,bldg){return projId+"__"+bldg.replace(/[\s.#$\[\]/]/g,"_");}
@@ -303,8 +303,8 @@ function fillDefaults(){
         TRADES.forEach((t,ti)=>{
           if(!DATA[k][t[0]]){
             let st="";
-            if(def.upTo&&TIDX[def.upTo]!==undefined&&ti<=TIDX[def.upTo])st="✅ Done";
-            else if(def.cur&&t[0]===def.cur)st="🔄 In Progress";
+            if(def.upTo&&TIDX[def.upTo]!==undefined&&ti<=TIDX[def.upTo])st="Done";
+            else if(def.cur&&t[0]===def.cur)st="In Progress";
             DATA[k][t[0]]={status:st,startDate:"",endDate:"",notes:""};
           }
         });
@@ -335,7 +335,7 @@ function saveToFirebase(){
   },800);
 }
 
-// Real-time listener — any change by anyone updates all screens instantly
+// Real-time listener  any change by anyone updates all screens instantly
 function startListener(){
   onValue(ref(db,"mym_platform"),(snapshot)=>{
     if(snapshot.exists()){
@@ -348,13 +348,13 @@ function startListener(){
 
 function showToast(){const t=document.getElementById("toast");t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800);}
 
-// ══ STATS ═════════════════════════════════════════════════════════════════════
-function bStats(projId,bldg){const k=dbKey(projId,bldg),d=DATA[k]||{};let done=0,prog=0,blk=0;TRADES.forEach(t=>{const s=(d[t[0]]||{}).status||"";if(s==="✅ Done")done++;else if(s==="🔄 In Progress")prog++;else if(s==="⛔ Blocked")blk++;});return{done,prog,blk,total:TRADES.length};}
+//  STATS 
+function bStats(projId,bldg){const k=dbKey(projId,bldg),d=DATA[k]||{};let done=0,prog=0,blk=0;TRADES.forEach(t=>{const s=(d[t[0]]||{}).status||"";if(s==="Done")done++;else if(s==="In Progress")prog++;else if(s==="Blocked")blk++;});return{done,prog,blk,total:TRADES.length};}
 function pStats(proj){let td=0,tt=0,tb=0;proj.buildings.forEach(b=>{const s=bStats(proj.id,b);td+=s.done;tt+=s.total;tb+=s.blk;});return{pct:Math.round(td/tt*100)||0,done:td,total:tt,blk:tb};}
-function scls(s){if(s==="✅ Done")return"done";if(s==="🔄 In Progress")return"progress";if(s==="⛔ Blocked")return"blocked";return"";}
+function scls(s){if(s==="Done")return"done";if(s==="In Progress")return"progress";if(s==="Blocked")return"blocked";return"";}
 function calcDays(s,e){if(!s||!e)return null;const d=Math.round((new Date(e)-new Date(s))/86400000);return d>0?d:null;}
 
-// ══ VIEWS ═════════════════════════════════════════════════════════════════════
+//  VIEWS 
 function setView(v,pId,bldg){view=v;activeProject=pId||null;activeBuilding=bldg||null;document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("active"));const btn=document.getElementById("btn-"+(v==="buildings"||v==="trades"?"dashboard":v));if(btn)btn.classList.add("active");render();window.scrollTo(0,0);}
 
 
@@ -363,34 +363,34 @@ function render(){const app=document.getElementById("app");if(view==="dashboard"
 function renderDash(){
   const ps=visProjects();
   let h=`<div class="dashboard"><div class="dash-title">Active Projects (${ps.length})</div><div class="project-grid">`;
-  ps.forEach(p=>{const s=pStats(p);h+=`<div class="project-card" onclick="setView('buildings','${p.id}')"><div class="pc-header" style="background:${p.color}"><div><div class="pc-name">${p.name}</div><div class="pc-count">${p.buildings.length} building${p.buildings.length>1?"s":""}</div></div><div class="pc-pct">${s.pct}%</div></div><div style="height:5px;background:#E2EFDA"><div style="height:5px;width:${s.pct}%;background:${p.color};transition:width .4s;"></div></div><div class="pc-body"><div class="pc-stat"><span>✅ Done</span><strong>${s.done}/${s.total}</strong></div>${s.blk>0?`<div class="pc-stat"><span>⛔ Blocked</span><strong style="color:#C00000">${s.blk}</strong></div>`:""}<button class="pc-open" style="background:${p.color}">Open Project →</button></div></div>`;});
+  ps.forEach(p=>{const s=pStats(p);h+=`<div class="project-card" onclick="setView('buildings','${p.id}')"><div class="pc-header" style="background:${p.color}"><div><div class="pc-name">${p.name}</div><div class="pc-count">${p.buildings.length} building${p.buildings.length>1?"s":""}</div></div><div class="pc-pct">${s.pct}%</div></div><div style="height:5px;background:#E2EFDA"><div style="height:5px;width:${s.pct}%;background:${p.color};transition:width .4s;"></div></div><div class="pc-body"><div class="pc-stat"><span>Done</span><strong>${s.done}/${s.total}</strong></div>${s.blk>0?`<div class="pc-stat"><span>Blocked</span><strong style="color:#C00000">${s.blk}</strong></div>`:""}<button class="pc-open" style="background:${p.color}">Open Project </button></div></div>`;});
   return h+"</div></div>";
 }
 
 function renderBldgs(projId){
   const proj=PROJECTS.find(p=>p.id===projId);if(!proj)return"";
-  const toggles=`<div class="view-toggle"><button class="vt-btn ${bldgViewMode==="cards"?"active":"inactive"}" onclick="setBldgView('cards')">📋 Cards</button><button class="vt-btn ${bldgViewMode==="grid"?"active":"inactive"}" onclick="setBldgView('grid')">🗂 Full Grid</button></div>`;
+  const toggles=`<div class="view-toggle"><button class="vt-btn ${bldgViewMode==="cards"?"active":"inactive"}" onclick="setBldgView('cards')"> Cards</button><button class="vt-btn ${bldgViewMode==="grid"?"active":"inactive"}" onclick="setBldgView('grid')"> Full Grid</button></div>`;
   if(bldgViewMode==="grid")return renderGrid(proj);
-  let h=`<div class="bldg-list"><button class="back-btn" onclick="setView('dashboard')">← All Projects</button><div class="section-title" style="color:${proj.color}">${proj.name}</div>${toggles}<div class="bldg-grid">`;
+  let h=`<div class="bldg-list"><button class="back-btn" onclick="setView('dashboard')"> All Projects</button><div class="section-title" style="color:${proj.color}">${proj.name}</div>${toggles}<div class="bldg-grid">`;
   proj.buildings.forEach(b=>{
     const s=bStats(projId,b),pct=Math.round(s.done/s.total*100),k=dbKey(projId,b);
-    const at=TRADES.find(([tid])=>(DATA[k]||{})[tid]?.status==="🔄 In Progress");
-    h+=`<div class="bldg-card" onclick="setView('trades','${projId}','${b.replace(/'/g,"\\'")}')"><div class="bldg-name">${b}</div><div class="bldg-bar-wrap"><div class="bldg-bar" style="width:${pct}%;background:${proj.color}"></div></div><div class="bldg-pct" style="color:${proj.color}">${pct}%</div><div class="bldg-stats">${s.done}/${s.total} done${s.prog>0?" · "+s.prog+" active":""}</div>${at?`<div class="bldg-active">🔄 ${at[1]}</div>`:""}${s.blk>0?`<div class="bldg-blocked">⛔ ${s.blk} blocked</div>`:""}</div>`;
+    const at=TRADES.find(([tid])=>(DATA[k]||{})[tid]?.status==="In Progress");
+    h+=`<div class="bldg-card" onclick="setView('trades','${projId}','${b.replace(/'/g,"\\'")}')"><div class="bldg-name">${b}</div><div class="bldg-bar-wrap"><div class="bldg-bar" style="width:${pct}%;background:${proj.color}"></div></div><div class="bldg-pct" style="color:${proj.color}">${pct}%</div><div class="bldg-stats">${s.done}/${s.total} done${s.prog>0?"  "+s.prog+" active":""}</div>${at?`<div class="bldg-active"> ${at[1]}</div>`:""}${s.blk>0?`<div class="bldg-blocked"> ${s.blk} blocked</div>`:""}</div>`;
   });
   return h+"</div></div>";
 }
 
 function renderGrid(proj){
-  const toggles=`<div class="view-toggle"><button class="vt-btn inactive" onclick="setBldgView('cards')">📋 Cards</button><button class="vt-btn active">🗂 Full Grid</button></div>`;
-  let h=`<div class="bldg-list"><button class="back-btn" onclick="setView('dashboard')">← All Projects</button><div class="section-title" style="color:${proj.color}">${proj.name}</div>${toggles}<div class="matrix-wrap"><table class="mtx"><tr><th class="tcol" style="background:#1F3864;color:white;">TRADE</th>${proj.buildings.map(b=>`<th style="background:${proj.color};color:white;">${b}</th>`).join("")}</tr>`;
+  const toggles=`<div class="view-toggle"><button class="vt-btn inactive" onclick="setBldgView('cards')"> Cards</button><button class="vt-btn active"> Full Grid</button></div>`;
+  let h=`<div class="bldg-list"><button class="back-btn" onclick="setView('dashboard')"> All Projects</button><div class="section-title" style="color:${proj.color}">${proj.name}</div>${toggles}<div class="matrix-wrap"><table class="mtx"><tr><th class="tcol" style="background:#1F3864;color:white;">TRADE</th>${proj.buildings.map(b=>`<th style="background:${proj.color};color:white;">${b}</th>`).join("")}</tr>`;
   TRADES.forEach(([tid,tname])=>{
     if(GROUPS[tid])h+=`<tr class="ghdr"><td colspan="${1+proj.buildings.length}" style="background:${GROUPS[tid][1]};">${GROUPS[tid][0]}</td></tr>`;
     h+=`<tr><td class="tname">${tname}</td>`;
     proj.buildings.forEach(b=>{
       const k=dbKey(proj.id,b),s=(DATA[k]||{})[tid]?.status||"";
-      const bg=s==="✅ Done"?"#C6EFCE":s==="🔄 In Progress"?"#FFEB9C":s==="⛔ Blocked"?"#FFE0E0":"#FAFAFA";
-      const fg=s==="✅ Done"?"#276221":s==="🔄 In Progress"?"#9C5700":s==="⛔ Blocked"?"#C00000":"#ccc";
-      const sym=s==="✅ Done"?"✓":s==="🔄 In Progress"?"▶":s==="⛔ Blocked"?"✕":"";
+      const bg=s==="Done"?"#C6EFCE":s==="In Progress"?"#FFEB9C":s==="Blocked"?"#FFE0E0":"#FAFAFA";
+      const fg=s==="Done"?"#276221":s==="In Progress"?"#9C5700":s==="Blocked"?"#C00000":"#ccc";
+      const sym=s==="Done"?"":s==="In Progress"?"":s==="Blocked"?"":"";
       h+=`<td style="background:${bg};color:${fg};text-align:center;font-weight:bold;font-size:12px;cursor:pointer;" onclick="setView('trades','${proj.id}','${b.replace(/'/g,"\\'")}');">${sym}</td>`;
     });
     h+=`</tr>`;
@@ -404,21 +404,21 @@ function renderTrades(projId,bldg){
   const k=dbKey(projId,bldg),s=bStats(projId,bldg),pct=Math.round(s.done/s.total*100);
   const photos=(DATA[k]||{})._photos||[],ownerNote=(DATA[k]||{})._ownerNote||"",comments=(DATA[k]||{})._comments||[];
   const canEd=canEdit(),safeKey=k.replace(/[^a-z0-9]/gi,"");
-  let h=`<div class="trade-detail"><button class="back-btn" onclick="setView('buildings','${projId}')">← ${proj.name}</button><div class="detail-title" style="color:${proj.color}">${bldg}</div><div class="detail-sub">${proj.name} · ${s.done}/${s.total} complete (${pct}%)</div>
-  <div class="section-box"><div class="section-box-title">📷 Site Photos</div><div class="photos-row">${photos.map((p,i)=>`<img class="photo-thumb" src="${p}" onclick="openLB('${projId}','${bldg.replace(/'/g,"\\'")}',${i})">`).join("")}${canEd?`<div class="add-photo" onclick="triggerPhoto('${projId}','${bldg.replace(/'/g,"\\'")}')"><span>+</span><span>Photo</span></div>`:(photos.length===0?'<span style="font-size:10px;color:#808080;">No photos yet</span>':'')}</div></div>
-  <div class="section-box"><div class="section-box-title">💬 Update for Owner</div><textarea class="notes-box${!canEd?" ro":""}" rows="2" placeholder="${canEd?"Write an update for the owner...":"No update yet."}" ${!canEd?"readonly":""} onchange="updateOwnerNote('${projId}','${bldg.replace(/'/g,"\\'")}',this.value)">${ownerNote}</textarea></div>
+  let h=`<div class="trade-detail"><button class="back-btn" onclick="setView('buildings','${projId}')"> ${proj.name}</button><div class="detail-title" style="color:${proj.color}">${bldg}</div><div class="detail-sub">${proj.name}  ${s.done}/${s.total} complete (${pct}%)</div>
+  <div class="section-box"><div class="section-box-title"> Site Photos</div><div class="photos-row">${photos.map((p,i)=>`<img class="photo-thumb" src="${p}" onclick="openLB('${projId}','${bldg.replace(/'/g,"\\'")}',${i})">`).join("")}${canEd?`<div class="add-photo" onclick="triggerPhoto('${projId}','${bldg.replace(/'/g,"\\'")}')"><span>+</span><span>Photo</span></div>`:(photos.length===0?'<span style="font-size:10px;color:#808080;">No photos yet</span>':'')}</div></div>
+  <div class="section-box"><div class="section-box-title"> Update for Owner</div><textarea class="notes-box${!canEd?" ro":""}" rows="2" placeholder="${canEd?"Write an update for the owner...":"No update yet."}" ${!canEd?"readonly":""} onchange="updateOwnerNote('${projId}','${bldg.replace(/'/g,"\\'")}',this.value)">${ownerNote}</textarea></div>
 
-  <div class="section-box"><div class="section-box-title">💬 Comments</div>${comments.map(c=>`<div class="comment-item"><div class="comment-meta">${c.user} · ${c.role} · ${c.time}</div><div class="comment-text">${c.text}</div></div>`).join("")}<textarea class="comment-inp" rows="2" id="ci-${safeKey}" placeholder="Add a comment..."></textarea><button class="comment-btn" onclick="addComment('${projId}','${bldg.replace(/'/g,"\\'")}')">Post</button></div>
-  <div style="font-size:11px;font-weight:bold;color:#1F3864;margin:8px 0 6px;padding-top:6px;border-top:2px solid #E0E0E0;">🔧 Trade Status</div>`;
+  <div class="section-box"><div class="section-box-title"> Comments</div>${comments.map(c=>`<div class="comment-item"><div class="comment-meta">${c.user}  ${c.role}  ${c.time}</div><div class="comment-text">${c.text}</div></div>`).join("")}<textarea class="comment-inp" rows="2" id="ci-${safeKey}" placeholder="Add a comment..."></textarea><button class="comment-btn" onclick="addComment('${projId}','${bldg.replace(/'/g,"\\'")}')">Post</button></div>
+  <div style="font-size:11px;font-weight:bold;color:#1F3864;margin:8px 0 6px;padding-top:6px;border-top:2px solid #E0E0E0;"> Trade Status</div>`;
   TRADES.forEach(([tid,tname])=>{
     if(GROUPS[tid])h+=`<div class="group-hdr" style="background:${GROUPS[tid][1]}">${GROUPS[tid][0]}</div>`;
     const td=(DATA[k]||{})[tid]||{},st=td.status||"",cls=scls(st),days=calcDays(td.startDate,td.endDate);
     h+=`<div class="trade-row ${cls}"><div class="trade-top"><div class="trade-name ${cls}">${tname}</div>`;
-    if(canEd){h+=`<select class="status-sel ${cls}" onchange="updateStatus('${projId}','${bldg.replace(/'/g,"\\'")}','${tid}',this.value)"><option value=""${!st?" selected":""}>—</option><option value="✅ Done"${st==="✅ Done"?" selected":""}>✅ Done</option><option value="🔄 In Progress"${st==="🔄 In Progress"?" selected":""}>🔄 Active</option><option value="⏳ Not Started"${st==="⏳ Not Started"?" selected":""}>⏳ Not Started</option><option value="⛔ Blocked"${st==="⛔ Blocked"?" selected":""}>⛔ Blocked</option></select>`;}
-    else{const pc=st==="✅ Done"?"done":st==="🔄 In Progress"?"progress":st==="⛔ Blocked"?"blocked":"blank";h+=`<span class="status-pill ${pc}">${st||"Not Started"}</span>`;}
+    if(canEd){h+=`<select class="status-sel ${cls}" onchange="updateStatus('${projId}','${bldg.replace(/'/g,"\\'")}','${tid}',this.value)"><option value=""${!st?" selected":""}></option><option value="Done"${st==="Done"?" selected":""}>Done</option><option value="In Progress"${st==="In Progress"?" selected":""}>In Progress</option><option value="Not Started"${st==="Not Started"?" selected":""}>Not Started</option><option value="Blocked"${st==="Blocked"?" selected":""}>Blocked</option></select>`;}
+    else{const pc=st==="Done"?"done":st==="In Progress"?"progress":st==="Blocked"?"blocked":"blank";h+=`<span class="status-pill ${pc}">${st||"Not Started"}</span>`;}
     h+=`</div>`;
-    if(canEd){h+=`<div class="dates-row"><div class="date-grp"><div class="date-lbl">Start</div><input type="date" class="date-inp" value="${td.startDate||""}" onchange="updateField('${projId}','${bldg.replace(/'/g,"\\'")}','${tid}','startDate',this.value)"></div><div class="date-grp"><div class="date-lbl">End</div><input type="date" class="date-inp" value="${td.endDate||""}" onchange="updateField('${projId}','${bldg.replace(/'/g,"\\'")}','${tid}','endDate',this.value)"></div>${days!==null?`<div class="days-badge">⏱ ${days}d</div>`:""}</div><textarea class="trade-note-inp" rows="1" placeholder="Note..." onchange="updateField('${projId}','${bldg.replace(/'/g,"\\'")}','${tid}','notes',this.value)">${td.notes||""}</textarea>`;}
-    else{if(td.startDate||td.endDate){h+=`<div class="dates-row">`;if(td.startDate)h+=`<div class="date-grp"><div class="date-lbl">Start</div><div style="font-size:11px;padding:3px 5px;color:#595959;">${td.startDate}</div></div>`;if(td.endDate)h+=`<div class="date-grp"><div class="date-lbl">End</div><div style="font-size:11px;padding:3px 5px;color:#595959;">${td.endDate}</div></div>`;if(days!==null)h+=`<div class="days-badge">⏱ ${days}d</div>`;h+=`</div>`;}if(td.notes)h+=`<div style="font-size:10px;color:#808080;font-style:italic;margin-top:3px;">${td.notes}</div>`;}
+    if(canEd){h+=`<div class="dates-row"><div class="date-grp"><div class="date-lbl">Start</div><input type="date" class="date-inp" value="${td.startDate||""}" onchange="updateField('${projId}','${bldg.replace(/'/g,"\\'")}','${tid}','startDate',this.value)"></div><div class="date-grp"><div class="date-lbl">End</div><input type="date" class="date-inp" value="${td.endDate||""}" onchange="updateField('${projId}','${bldg.replace(/'/g,"\\'")}','${tid}','endDate',this.value)"></div>${days!==null?`<div class="days-badge"> ${days}d</div>`:""}</div><textarea class="trade-note-inp" rows="1" placeholder="Note..." onchange="updateField('${projId}','${bldg.replace(/'/g,"\\'")}','${tid}','notes',this.value)">${td.notes||""}</textarea>`;}
+    else{if(td.startDate||td.endDate){h+=`<div class="dates-row">`;if(td.startDate)h+=`<div class="date-grp"><div class="date-lbl">Start</div><div style="font-size:11px;padding:3px 5px;color:#595959;">${td.startDate}</div></div>`;if(td.endDate)h+=`<div class="date-grp"><div class="date-lbl">End</div><div style="font-size:11px;padding:3px 5px;color:#595959;">${td.endDate}</div></div>`;if(days!==null)h+=`<div class="days-badge"> ${days}d</div>`;h+=`</div>`;}if(td.notes)h+=`<div style="font-size:10px;color:#808080;font-style:italic;margin-top:3px;">${td.notes}</div>`;}
     h+=`</div>`;
   });
   return h+"</div>";
@@ -426,29 +426,29 @@ function renderTrades(projId,bldg){
 
 function renderSummary(){
 const ps=visProjects(),today=new Date().toLocaleDateString(“en-US”,{month:“long”,day:“numeric”,year:“numeric”});
-let h=`<div class="summary-wrap"><div class="dash-title">📊 Weekly Summary</div><div style="font-size:10px;color:#808080;margin-bottom:8px;">As of ${today}</div><div class="summary-grid">`;
-ps.forEach(proj=>{proj.buildings.forEach(bldg=>{const s=bStats(proj.id,bldg),pct=Math.round(s.done/s.total*100),k=dbKey(proj.id,bldg);const at=TRADES.find(([tid])=>(DATA[k]||{})[tid]?.status===“🔄 In Progress”);const note=(DATA[k]||{})._ownerNote||””;h+=`<div class="sum-card"><div style="font-size:9px;color:#808080;font-weight:bold;text-transform:uppercase;margin-bottom:2px;">${proj.name}</div><div style="font-size:12px;font-weight:bold;color:#1F3864;margin-bottom:5px;">${bldg}</div><div style="height:7px;background:#E2EFDA;border-radius:4px;margin-bottom:4px;"><div style="height:100%;border-radius:4px;width:${pct}%;background:${proj.color};"></div></div><div style="font-size:14px;font-weight:bold;color:#375623;">${pct}%</div><div style="font-size:10px;color:#808080;margin-top:2px;">${s.done}/${s.total} trades${s.prog>0?" · "+s.prog+" active":""}</div>${at?`<div style="font-size:10px;color:#9C5700;font-style:italic;margin-top:3px;">🔄 ${at[1]}</div>`:""}${s.blk>0?`<div style="font-size:10px;color:#C00000;font-weight:bold;margin-top:2px;">⛔ ${s.blk} blocked</div>`:""}${note?`<div style="font-size:10px;color:#595959;font-style:italic;margin-top:4px;border-left:2px solid ${proj.color};padding-left:5px;">${note.substring(0,60)}${note.length>60?”…”:””}</div>`:""}</div>`;});});
+let h=`<div class="summary-wrap"><div class="dash-title"> Weekly Summary</div><div style="font-size:10px;color:#808080;margin-bottom:8px;">As of ${today}</div><div class="summary-grid">`;
+ps.forEach(proj=>{proj.buildings.forEach(bldg=>{const s=bStats(proj.id,bldg),pct=Math.round(s.done/s.total*100),k=dbKey(proj.id,bldg);const at=TRADES.find(([tid])=>(DATA[k]||{})[tid]?.status===“In Progress”);const note=(DATA[k]||{})._ownerNote||””;h+=`<div class="sum-card"><div style="font-size:9px;color:#808080;font-weight:bold;text-transform:uppercase;margin-bottom:2px;">${proj.name}</div><div style="font-size:12px;font-weight:bold;color:#1F3864;margin-bottom:5px;">${bldg}</div><div style="height:7px;background:#E2EFDA;border-radius:4px;margin-bottom:4px;"><div style="height:100%;border-radius:4px;width:${pct}%;background:${proj.color};"></div></div><div style="font-size:14px;font-weight:bold;color:#375623;">${pct}%</div><div style="font-size:10px;color:#808080;margin-top:2px;">${s.done}/${s.total} trades${s.prog>0?"  "+s.prog+" active":""}</div>${at?`<div style="font-size:10px;color:#9C5700;font-style:italic;margin-top:3px;"> ${at[1]}</div>`:""}${s.blk>0?`<div style="font-size:10px;color:#C00000;font-weight:bold;margin-top:2px;"> ${s.blk} blocked</div>`:""}${note?`<div style="font-size:10px;color:#595959;font-style:italic;margin-top:4px;border-left:2px solid ${proj.color};padding-left:5px;">${note.substring(0,60)}${note.length>60?”…”:””}</div>`:""}</div>`;});});
 return h+”</div></div>”;
 }
 
 function renderAdmin(){
-return`<div class="dashboard"><div class="dash-title">⚙️ Admin Panel</div><div class="admin-section"><h3>Owner Login Credentials</h3>${USERS.filter(u=>u.role==="owner").map(u=>`<div class="user-row"><span><strong>${u.projects?u.projects.join(”, “):“All”}</strong></span><span style="font-size:10px;color:#595959;font-family:monospace;">${u.u} / ${u.p}</span></div>`).join("")}</div><div class="admin-section"><h3>All Users</h3>${USERS.map(u=>`<div class="user-row"><span><strong>${u.u}</strong>${u.projects?” — “+u.projects.join(”, “):””}</span><span class="user-role ${u.role}">${u.role}</span></div>`).join("")}</div><div class="admin-section"><h3>Projects</h3>${PROJECTS.map(p=>{const s=pStats(p);return`<div class="user-row"><span><strong>${p.name}</strong> — ${p.buildings.length} bldgs</span><span style="font-weight:bold;color:#375623;">${s.pct}%</span></div>`;}).join("")}</div></div>`;
+return`<div class="dashboard"><div class="dash-title"> Admin Panel</div><div class="admin-section"><h3>Owner Login Credentials</h3>${USERS.filter(u=>u.role==="owner").map(u=>`<div class="user-row"><span><strong>${u.projects?u.projects.join(”, “):“All”}</strong></span><span style="font-size:10px;color:#595959;font-family:monospace;">${u.u} / ${u.p}</span></div>`).join("")}</div><div class="admin-section"><h3>All Users</h3>${USERS.map(u=>`<div class="user-row"><span><strong>${u.u}</strong>${u.projects?”  “+u.projects.join(”, “):””}</span><span class="user-role ${u.role}">${u.role}</span></div>`).join("")}</div><div class="admin-section"><h3>Projects</h3>${PROJECTS.map(p=>{const s=pStats(p);return`<div class="user-row"><span><strong>${p.name}</strong>  ${p.buildings.length} bldgs</span><span style="font-weight:bold;color:#375623;">${s.pct}%</span></div>`;}).join("")}</div></div>`;
 }
 
-// ══ UPDATE HANDLERS ═══════════════════════════════════════════════════════════
-function updateStatus(projId,bldg,tid,val){if(!canEdit())return;const k=dbKey(projId,bldg);if(!DATA[k])DATA[k]={};if(!DATA[k][tid])DATA[k][tid]={status:””,startDate:””,endDate:””,notes:””};DATA[k][tid].status=val;if(val===“🔄 In Progress”&&!DATA[k][tid].startDate)DATA[k][tid].startDate=new Date().toISOString().split(“T”)[0];if(val===“✅ Done”&&!DATA[k][tid].endDate)DATA[k][tid].endDate=new Date().toISOString().split(“T”)[0];saveToFirebase();render();}
+//  UPDATE HANDLERS
+function updateStatus(projId,bldg,tid,val){if(!canEdit())return;const k=dbKey(projId,bldg);if(!DATA[k])DATA[k]={};if(!DATA[k][tid])DATA[k][tid]={status:””,startDate:””,endDate:””,notes:””};DATA[k][tid].status=val;if(val===“In Progress”&&!DATA[k][tid].startDate)DATA[k][tid].startDate=new Date().toISOString().split(“T”)[0];if(val===“Done”&&!DATA[k][tid].endDate)DATA[k][tid].endDate=new Date().toISOString().split(“T”)[0];saveToFirebase();render();}
 function updateField(projId,bldg,tid,field,val){if(!canEdit())return;const k=dbKey(projId,bldg);if(!DATA[k])DATA[k]={};if(!DATA[k][tid])DATA[k][tid]={status:””,startDate:””,endDate:””,notes:””};DATA[k][tid][field]=val;saveToFirebase();if(field!==“notes”)render();}
 function updateOwnerNote(projId,bldg,val){const k=dbKey(projId,bldg);if(!DATA[k])DATA[k]={};DATA[k]._ownerNote=val;saveToFirebase();}
 function addComment(projId,bldg){const k=dbKey(projId,bldg),safeKey=k.replace(/[^a-z0-9]/gi,””),inp=document.getElementById(“ci-”+safeKey);if(!inp||!inp.value.trim())return;if(!DATA[k])DATA[k]={};if(!DATA[k]._comments)DATA[k]._comments=[];DATA[k]._comments.push({user:CU.u,role:CU.role,time:new Date().toLocaleDateString(“en-US”,{month:“short”,day:“numeric”,hour:“2-digit”,minute:“2-digit”}),text:inp.value.trim()});saveToFirebase();render();}
 
-// ══ PHOTOS ════════════════════════════════════════════════════════════════════
+//  PHOTOS
 function triggerPhoto(projId,bldg){if(!canEdit())return;pendingPhotoProj=projId;pendingPhotoBldg=bldg;document.getElementById(“photoInput”).click();}
 function handlePhoto(e){const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=ev=>{const img=new Image();img.onload=()=>{const canvas=document.createElement(“canvas”);const MAX=800;let w=img.width,h=img.height;if(w>MAX){h=Math.round(h*MAX/w);w=MAX;}if(h>MAX){w=Math.round(w*MAX/h);h=MAX;}canvas.width=w;canvas.height=h;canvas.getContext(“2d”).drawImage(img,0,0,w,h);const k=dbKey(pendingPhotoProj,pendingPhotoBldg);if(!DATA[k])DATA[k]={};if(!DATA[k]._photos)DATA[k]._photos=[];DATA[k]._photos.push(canvas.toDataURL(“image/jpeg”,.7));saveToFirebase();render();};img.src=ev.target.result;};reader.readAsDataURL(file);e.target.value=””;}
 function openLB(projId,bldg,idx){lbProj=projId;lbBldg=bldg;lbIdx=idx;const photos=(DATA[dbKey(projId,bldg)]||{})._photos||[];document.getElementById(“lbImg”).src=photos[idx];document.getElementById(“lbDel”).style.display=canEdit()?“block”:“none”;document.getElementById(“lightbox”).classList.add(“open”);}
 function closeLB(){document.getElementById(“lightbox”).classList.remove(“open”);lbProj=lbBldg=lbIdx=null;}
 function delPhoto(){if(!canEdit()||lbProj===null)return;const k=dbKey(lbProj,lbBldg);DATA[k]._photos.splice(lbIdx,1);closeLB();saveToFirebase();render();}
 
-// ══ EXPOSE ALL FUNCTIONS TO WINDOW (required for onclick in HTML) ═════════════
+//  EXPOSE ALL FUNCTIONS TO WINDOW (required for onclick in HTML)
 window.doLogin=doLogin;
 window.doSignOut=doSignOut;
 window.setLoginRole=setLoginRole;
@@ -466,7 +466,7 @@ window.setView=setView;
 window.setBldgView=function(m){bldgViewMode=m;render();};
 window.render=render;
 
-// ══ BOOT ══════════════════════════════════════════════════════════════════════
+//  BOOT
 async function bootApp(){
 await loadFromFirebase();
 render();
